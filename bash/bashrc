@@ -1,6 +1,5 @@
 #
-# DESCRIPTION: My awesome bash prompt with additional information.
-#      AUTHOR: Igor Kalnitsky <igor@kalnitsky.org>
+# DESCRIPTION: My awesome bash prompt based on awesome Igor Kalnitsky's bash prompt.
 #
 
 #
@@ -29,26 +28,6 @@ shopt -s histappend
 shopt -s checkwinsize
 
 
-# Trick to enable color support in some programs.
-# Works on Linux systems.
-if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" \
-       || eval "$(dircolors -b)"
-
-  alias ls='ls --color=auto --group-directories-first'
-  alias dir='dir --color=auto'
-  alias grep='grep --color=auto'
-fi
-
-
-# Enable programmable completion features.
-# Works on Linux systems.
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-  . /usr/share/bash-completion/bash_completion
-elif [ -f /etc/bash_completion ]; then
-  . /etc/bash_completion
-fi
-
 # enable completion on mac os with brew package
 if which brew >/dev/null; then
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -63,13 +42,6 @@ _pip_completion()
                  PIP_AUTO_COMPLETE=1 $1 ) )
 }
 complete -o default -F _pip_completion pip
-
-
-# When open a new tab copy settings from the previous
-# (current directory, and so on). Works on Linux systems.
-if [ -f /etc/profile.d/vte.sh ]; then
-  . /etc/profile.d/vte.sh
-fi
 
 
 # Enable virtualenvwrappers if exists.
@@ -90,7 +62,7 @@ fi
 
 # This variable is used by different programs
 # and points to default text editor.
-export EDITOR=vim
+export EDITOR=atom
 
 # Enable 256 colors support.
 export TERM=xterm-256color
@@ -130,9 +102,6 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 export BASEPROMPT=`__baseprompt`
 export BASEPROMPT=$BASEPROMPT'`__extprompt`'
 export PS1="\n\[\e[G\]${BASEPROMPT}\n\$ "
-
-export PATH="$PATH:$HOME/Library/Python/2.7/bin"
-export PYTHONPATH="$PYTHONPATH:/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python"
 export ANDROID_HOME=${HOME}/Library/Android/sdk
 export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
